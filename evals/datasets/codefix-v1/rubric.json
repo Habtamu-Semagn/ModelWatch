@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "scale": {
+    "min": 1,
+    "max": 5,
+    "anchors": {
+      "1": "Does not address the bug. Broken code is returned unchanged, is syntactically invalid, or introduces an immediate NameError/ImportError.",
+      "2": "Recognises the intent but is wrong or incomplete: raises an unexpected exception type, handles only the happy path, silently returns a wrong value, or ignores an explicit requirement in the instruction.",
+      "3": "Fixes the stated bug and passes the visible tests, but misses a stated requirement or degrades an edge case (empty input, boundary value, non-mutation, wrong exception type).",
+      "4": "Correct for all stated requirements and edge cases. Minor style or idiom deviations only; no behavioural difference from the reference.",
+      "5": "Correct, complete, and robust beyond the stated requirements: handles inputs the tests never exercise, does not mutate caller state, and the code reads like idiomatic Python."
+    }
+  },
+  "judge_model": "openai/gpt-oss-120b",
+  "judge_temperature": 0,
+  "max_output_tokens": 900,
+  "judge_family_rule": "The judge must be a different model FAMILY from every model it grades. Both codefix-v1 subjects are Alibaba Qwen (groq) and Google Gemini (google), so the judge is OpenAI gpt-oss. Same-family judging shares blind spots and is not evidence of anything.",
+  "guidance": [
+    "Judge ONLY the code in the fenced block. Ignore any prose outside it.",
+    "The reference fix and the tests below are ground truth for the stated requirements, not for style.",
+    "Score 3 when the visible tests pass but a stated requirement is missed; the tests do not cover everything the instruction demands.",
+    "Do not reward length. A 3-line correct fix is a 5; a 40-line fix that misses one requirement is a 3.",
+    "If the response contains no fenced code block, score 1."
+  ],
+  "instructions": [
+    "You are grading one attempt at a Python bugfix. Reply with ONLY a single line of the form: SCORE: <n> where <n> is an integer 1-5. No explanation, no other text.",
+    "You are grading one attempt at a Python bugfix. Reply with ONLY a single line of the form: SCORE: <n> where <n> is an integer 1-5. No explanation, no other text."
+  ]
+}

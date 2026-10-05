@@ -1,0 +1,31 @@
+{
+  "name": "evalkit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "migrate": "tsx db/migrate.ts",
+    "step1": "tsx scripts/step1-run-unit.ts",
+    "run-eval": "tsx scripts/run-eval.ts",
+    "worker": "tsx evals/runner/worker.ts",
+    "check-dataset": "tsx scripts/check-dataset.ts",
+    "check-scorer-negative": "tsx scripts/check-scorer-negative.ts",
+    "check-judge": "tsx scripts/check-judge.ts",
+    "check-sandbox": "tsx scripts/check-sandbox.ts",
+    "step8-judge": "tsx scripts/step8-judge-e2e.ts",
+    "report": "tsx scripts/report.ts --latest",
+    "chaos": "tsx scripts/chaos.ts",
+    "build-sandbox": "docker build -f evals/sandbox/Dockerfile.python -t evalkit-sandbox:py311 ."
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "pg": "^8.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "@types/pg": "^8.11.6",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "dataset": "codefix-v1",
+  "version": 1,
+  "description": "15 Python bugfix tasks, programmatically scored by pytest in a docker sandbox.",
+  "input_file_default": "solution.py",
+  "system_prompt": "You are a careful Python engineer. Return ONLY the complete corrected source file inside a single ```python code fence. No explanation, no prose.",
+  "defaults": {
+    "scoring": "programmatic",
+    "temperature": 0.0,
+    "max_tokens": 2048
+  }
+}

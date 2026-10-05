@@ -1,0 +1,13 @@
+FROM python:3.11-slim
+
+RUN pip install --no-cache-dir pytest==8.3.2
+
+# Never write bytecode: /work is mounted read-only
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+USER 1000:1000
+WORKDIR /work
+
+ENTRYPOINT ["python"]
+CMD ["-c", "print('evalkit sandbox')"]

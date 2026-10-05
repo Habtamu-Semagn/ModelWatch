@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: evalkit-postgres
+    environment:
+      POSTGRES_USER: evalkit
+      POSTGRES_PASSWORD: evalkit
+      POSTGRES_DB: evalkit
+    ports:
+      # 5432 is often taken (Supabase etc). Override with POSTGRES_HOST_PORT.
+      - "${POSTGRES_HOST_PORT:-55432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # crypto for gen_random_uuid()
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/00_schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U evalkit -d evalkit"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  pgdata:
